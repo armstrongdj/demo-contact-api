@@ -6,6 +6,11 @@ namespace ContactsAPI.Web.Models
 {
     public class Address
     {
+        public Address()
+        {
+            ContactAddresses = new List<ContactAddress>();
+        }
+
         public int Id { get; set; }
         public string Line1 { get; set; }
         public string Line2 { get; set; }
@@ -13,6 +18,6 @@ namespace ContactsAPI.Web.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
 
-        public List<ContactAddress> ContactAddresses { get; set; }
+        public virtual ICollection<ContactAddress> ContactAddresses { get; set; }
     }
 }

@@ -6,6 +6,13 @@ namespace ContactsAPI.Web.Models
 {
     public class Contact
     {
+        public Contact()
+        {
+            ContactAddresses = new List<ContactAddress>();
+            RelatedContacts = new List<ContactRelationship>();
+            RelativeOfContacts = new List<ContactRelationship>();
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,9 +25,9 @@ namespace ContactsAPI.Web.Models
         public DateTime? DateOfHire { get; set; }
         public bool CurrentlyEmployed { get; set; }
 
-        public List<ContactAddress> ContactAddresses { get; set; }
-        public List<ContactRelationship> RelatedContacts { get; set; }
-        public List<ContactRelationship> RelativeOfContacts { get; set; }
+        public virtual ICollection<ContactAddress> ContactAddresses { get; set; }
+        public virtual ICollection<ContactRelationship> RelatedContacts { get; set; }
+        public virtual ICollection<ContactRelationship> RelativeOfContacts { get; set; }
 
     }
 }

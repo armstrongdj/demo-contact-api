@@ -21,6 +21,7 @@ namespace ContactsAPI.Web.Infrastructure
                 .HasMaxLength(50);
 
             builder.Property(c => c.EmployeeId)
+                .IsRequired(false)
                 .HasMaxLength(10);
 
             builder.Property(c => c.Email)
@@ -38,6 +39,9 @@ namespace ContactsAPI.Web.Infrastructure
 
             //support lookup by last name
             builder.HasIndex(c => c.LastName);
+
+            builder.HasIndex(c => c.EmployeeId)
+                .IsUnique();
         }
     }
 }
