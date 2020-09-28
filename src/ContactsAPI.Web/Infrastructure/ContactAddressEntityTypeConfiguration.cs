@@ -24,6 +24,9 @@ namespace ContactsAPI.Web.Infrastructure
 
             builder.Property(ca => ca.AddressType)
                 .HasMaxLength(15);
+
+            builder.HasIndex(ca => new { ca.ContactId, ca.AddressType })
+                .IsUnique();
         }
     }
 }

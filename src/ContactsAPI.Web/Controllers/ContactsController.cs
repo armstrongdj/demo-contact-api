@@ -40,7 +40,17 @@ namespace ContactsAPI.Web.Controllers
         {
             //todo: add pagination
             lastName = lastName.ToLower();
-            return await context.Contacts.Where(c => c.LastName.ToLower() == lastName).ToListAsync();
+            var result = await context.Contacts.Where(c => c.LastName.ToLower() == lastName).ToListAsync();
+
+            //hack: prevent lazy loaded verbose data
+            //todo: may need a non-verbose model
+            foreach (var contact in result)
+            {
+                contact.RelatedContacts.Clear();
+                contact.ContactAddresses.Clear();
+            }
+
+            return result;
         }
 
         [HttpGet("employee/{employeeId}")]
@@ -124,7 +134,7 @@ namespace ContactsAPI.Web.Controllers
             return CreatedAtAction(nameof(GetContact), new { id = newContact.Id }, newContact);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult> UpdateContact([FromBody]Contact contact)
         {
             var updateContact = await context.Contacts.SingleOrDefaultAsync(c => c.Id == contact.Id);
@@ -134,8 +144,8 @@ namespace ContactsAPI.Web.Controllers
                 return NotFound();
             }
 
-            //todo: need to determine an update strategy for addresses and related contacts
-            updateContact = contact;
+            //todo: doesn't update related entities - need a way to update addresses
+            context.Entry(updateContact).CurrentValues.SetValues(contact);
             context.Contacts.Update(updateContact);
             await context.SaveChangesAsync();
 
