@@ -14,5 +14,13 @@ namespace ContactsAPI.Web.Infrastructure
         }
 
         public DbSet<Contact> Contacts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AddressEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactAddressEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactRelationshipEntityTypeConfiguration());
+        }
     }
 }

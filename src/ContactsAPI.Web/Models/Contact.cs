@@ -14,12 +14,13 @@ namespace ContactsAPI.Web.Models
         public string CellPhone { get; set; }
         public string HomePhone { get; set; }
         public string OfficePhone { get; set; }
-        public DateTimeOffset DateOfBirth { get; set; }
-        public DateTimeOffset DateOfHire { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public DateTime? DateOfHire { get; set; }
         public bool CurrentlyEmployed { get; set; }
 
-        public List<Address> Addresses { get; set; }
-        public List<Contact> RelatedContacts { get; set; }
+        public List<ContactAddress> ContactAddresses { get; set; }
+        public List<ContactRelationship> RelatedContacts { get; set; }
+        public List<ContactRelationship> RelativeOfContacts { get; set; }
 
     }
 }
