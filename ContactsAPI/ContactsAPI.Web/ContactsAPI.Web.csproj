@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ContactsAPI.Common\ContactsAPI.Common.csproj" />
     <ProjectReference Include="..\ContactsAPI.Sql\ContactsAPI.Sql.csproj" />
   </ItemGroup>
